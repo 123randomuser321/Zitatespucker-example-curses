@@ -402,7 +402,7 @@ static void zitatwPopulate(struct zitatw *wstrings, ZitatespuckerZitat *zitat)
 
 	// comment
 	if (zitat->comment != NULL) {
-		size_t commentlen = (mbstowcs(NULL, zitat->author, 0) + 1);
+		size_t commentlen = (mbstowcs(NULL, zitat->comment, 0) + 1);
 		wchar_t *wcomment = (wchar_t *) malloc(commentlen * sizeof(wchar_t));
 
 		if (wcomment != NULL)
