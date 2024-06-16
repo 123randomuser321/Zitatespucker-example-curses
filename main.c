@@ -60,8 +60,8 @@
 
 
 /* Zitatespucker */
-#define ZITATESPUCKER_FEATURE_JSON_C
-#define ZITATESPUCKER_FEATURE_SQLITE
+#define ZITATESPUCKER_JSON
+#define ZITATESPUCKER_SQL
 #include <Zitatespucker/Zitatespucker.h>
 
 
