@@ -523,9 +523,6 @@ static void wprintZitat(wchar_t *zitat, WINDOW *win)
 
 static size_t wcstillnew(wchar_t *wstr)
 {
-	if (*wstr == L'\n' || *wstr == L'\0')
-		return 0;
-	
 	size_t ret = 0;
 
 	while (*wstr != L'\n' && *wstr != L'\0') {
