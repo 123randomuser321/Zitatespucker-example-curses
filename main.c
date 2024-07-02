@@ -556,7 +556,7 @@ static size_t wcslentilnewlim(wchar_t *wstr, size_t lim)
 		ret++;
 	}
 
-	if (*wstr != L'\n' && *wstr != '\0') {
+	if (*wstr != L'\n' && *wstr != L'\0') {
 		while (!iswblank(*wstr) && ret > 0) {
 			wstr--;
 			ret--;
