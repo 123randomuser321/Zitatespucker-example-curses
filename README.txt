@@ -17,7 +17,9 @@ Against PDCurses:
 
 The window must be at least Y=24 and X=68 in size, otherwise the program will (cleanly) terminate.
 
-Any printed line beyond 56 characters will be truncated.
+Any printed line beyond 56 characters will have its content split across multiple lines automatically.
+However, you can still influence this behavior by manually putting "\n" somewhere within the strings.
+
 Any quote exceeding 14 lines will be truncated.
 
 The file paths to be read are hardcoded:
