@@ -113,7 +113,7 @@ static void wprintDate(bool annodomini, uint16_t year, uint8_t month, uint8_t da
 /*
 	get the number of characters (including starting position) until, but not including, the next newline or null terminator
 */
-static size_t wcstillnew(wchar_t *wstr);
+//static size_t wcstillnew(wchar_t *wstr);
 
 /*
 	get the number of characters (including starting position) until, but not including, the next newline or null terminator
@@ -532,6 +532,7 @@ static void wprintZitat(wchar_t *zitat, WINDOW *win)
 }
 
 
+/*
 static size_t wcstillnew(wchar_t *wstr)
 {
 	size_t ret = 0;
@@ -543,6 +544,7 @@ static size_t wcstillnew(wchar_t *wstr)
 	
 	return ret;
 }
+*/
 
 
 static size_t wcslentilnewlim(wchar_t *wstr, size_t lim)
