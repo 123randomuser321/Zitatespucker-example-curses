@@ -34,6 +34,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <wctype.h>
 
 
 /* pseudo-autodetection */
@@ -113,6 +114,16 @@ static void wprintDate(bool annodomini, uint16_t year, uint8_t month, uint8_t da
 	get the number of characters (including starting position) until, but not including, the next newline or null terminator
 */
 static size_t wcstillnew(wchar_t *wstr);
+
+/*
+	get the number of characters (including starting position) until, but not including, the next newline or null terminator
+
+	if no newline or null terminator is encountered within lim characters,
+	the function will return the position of the last blank space (iswblank()) within lim characters
+
+	if that doesn't work, lim is returned
+*/
+static size_t wcslentilnewlim(wchar_t *wstr, size_t lim);
 
 /*
 	return a simple dumb random
@@ -530,6 +541,28 @@ static size_t wcstillnew(wchar_t *wstr)
 		wstr++;
 	}
 	
+	return ret;
+}
+
+
+static size_t wcslentilnewlim(wchar_t *wstr, size_t lim)
+{
+	size_t ret = 0;
+
+	while (*wstr != L'\n' && *wstr != L'\0') {
+		wstr++;
+		ret++;
+	}
+
+	if (ret > lim) {
+		while (!iswblank(*wstr) && ret > 0) {
+			wstr--;
+			ret--;
+		}
+		if (ret == 0)
+			ret = lim;
+	}
+
 	return ret;
 }
 
