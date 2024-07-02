@@ -517,7 +517,7 @@ static void wprintZitat(wchar_t *zitat, WINDOW *win)
 	zitat_x_max--;
 	
 	wchar_t *tmp = zitat;
-	int tillnew = (int) wcstillnew(tmp);
+	int tillnew = (int) wcslentilnewlim(tmp, zitat_x_max);
 
 	for (int i = 0; *tmp != L'\0' && i < MINZITATY - 6; i++) {
 		mvwaddnwstr(win, i, (centerpos(zitat_x_max, tillnew)), tmp, tillnew);
@@ -526,7 +526,7 @@ static void wprintZitat(wchar_t *zitat, WINDOW *win)
 			break;
 		else {
 			tmp++;
-			tillnew = (int) wcstillnew(tmp);
+			tillnew = (int) wcslentilnewlim(tmp, zitat_x_max);
 		}
 	}
 }
