@@ -549,12 +549,12 @@ static size_t wcslentilnewlim(wchar_t *wstr, size_t lim)
 {
 	size_t ret = 0;
 
-	while (*wstr != L'\n' && *wstr != L'\0') {
+	while (*wstr != L'\n' && *wstr != L'\0' && ret < lim) {
 		wstr++;
 		ret++;
 	}
 
-	if (ret > lim) {
+	if (*wstr != L'\n' && *wstr != '\0') {
 		while (!iswblank(*wstr) && ret > 0) {
 			wstr--;
 			ret--;
