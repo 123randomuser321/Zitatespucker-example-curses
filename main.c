@@ -236,19 +236,19 @@ int main(int argc, char **argv)
 
 
 	/* 7. Legende_*: setup windows, associate with panels */
-	// Legende_frgd is 7y, 22x
-	WINDOW *Legende_frgd = newwin(7, 22, ((LINES - 7) - ((LINES - 7) % 2)) / 2, ((COLS - 22) - ((COLS - 22) % 2)) / 2);
+	// Legende_frgd is 7y, 24x
+	WINDOW *Legende_frgd = newwin(7, 24, ((LINES - 7) - ((LINES - 7) % 2)) / 2, ((COLS - 24) - ((COLS - 24) % 2)) / 2);
 
 	wbkgd(Legende_frgd, COLOR_PAIR(4));
 	wattron(Legende_frgd, COLOR_PAIR(4) | A_BOLD);
 	PANEL *Legende_frgd_panel = new_panel(Legende_frgd);
 	
-	#define HELP_LEFT	" --> previous entry"
-	#define HELP_RIGHT	" --> next entry"
+	#define HELP_LEFT	",a --> previous entry"
+	#define HELP_RIGHT	",d --> next entry"
 	#define HELP_R		"r --> random entry"
 	#define HELP_H		"h --> exit help"
 	#define HELP_Q		"q --> Quit"
-	// longest one is HELP_LEFT, with 19 + 1 printable characters
+	// longest one is HELP_LEFT, with 21 + 1 printable characters
 
 	mvwaddch(Legende_frgd, 1, 1, ACS_LARROW);
 	mvwprintw(Legende_frgd, 1, 2, "%s", HELP_LEFT);
@@ -278,6 +278,8 @@ int main(int argc, char **argv)
 		if (Legende_frgd_hidden) {
 			switch(wch) {
 				case KEY_LEFT:
+				case L'a':
+				case L'A':
 				if (curZitat->prevZitat != NULL) {
 					curZitat = curZitat->prevZitat;
 					zitatwPopulate(&wstrings, curZitat);
@@ -294,6 +296,8 @@ int main(int argc, char **argv)
 				break;
 
 				case KEY_RIGHT:
+				case L'd':
+				case L'D':
 				if (curZitat->nextZitat != NULL) {
 					curZitat = curZitat->nextZitat;
 					zitatwPopulate(&wstrings, curZitat);
