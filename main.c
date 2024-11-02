@@ -37,6 +37,12 @@
 #include <wctype.h>
 
 
+/* system-specific */
+#if !defined(NO_SYSTEM_RANDOM) && defined(__linux)
+#include <sys/random.h>
+#endif
+
+
 /* pseudo-autodetection */
 #ifdef __WIN32
 	#ifndef USE_NCURSES
@@ -575,12 +581,18 @@ static size_t wcslentilnewlim(wchar_t *wstr, size_t lim)
 
 static int simpleDumbRandom(void)
 {
+	int ret = 0;
+
+	#if !defined(NO_SYSTEM_RANDOM) && defined(__linux)
+	getrandom(&ret, sizeof(int), 0); // let's ignore the return value for now
+	#else
 	static unsigned int seed;
 
 	seed += (unsigned int) time(NULL); // this may overflow
 	srand(seed);
-	int ret = rand();
+	ret = rand();
 	seed += ret;
+	#endif
 
 	return ret;
 }
